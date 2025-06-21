@@ -1,0 +1,525 @@
+#此工作流程使用未经 GitHub 认证的作。
+#它们由第三方提供，并受
+# 单独的服务条款、隐私政策和支持
+# 文档。
+#此工作流将使用 Gradle 构建 Java 项目并缓存/恢复任何依赖项，以缩短工作流执行时间
+#有关更多信息，请参阅： https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
+名称：带有 Gradle 的 Java CI
+
+开：
+  推送：
+    #与 ref/heads 匹配的模式序列
+    分支：
+      - '发布/**'
+    #与 refs/tags 匹配的模式序列
+    标签：
+      - '*'
+
+工作机会：
+  build_folia：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & cd folia & & gradlew shadowJar
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_folia”
+        路径： build/libs/
+  build_bukkit：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - name：设置 JDK 8
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '8'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & cd 服务器 & gradlew shadowJar
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称：“allmusic_server_bukkit”
+        路径： build/libs/
+  build_bungeecord_velocity：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - name：设置 JDK 8
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '8'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & cd server_top & gradlew shadowJar
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称：“allmusic_server_bungeecord_velocity”
+        路径： build/libs/
+  build_fabric_1_16_5：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 17
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本：“17”
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_16_5 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_fabric_1_16_5”
+        路径： build/libs/
+  build_fabric_1_18_2：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 17
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本：“17”
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_18_2 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_fabric_1_18_2”
+        路径： build/libs/
+  build_fabric_1_19_2：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 17
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本：“17”
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_19_2 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称：“allmusic_server_fabric_1_19_2”
+        路径： build/libs/
+  build_fabric_1_20：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 17
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本：“17”
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_20 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称：“allmusic_server_fabric_1_20”
+        路径： build/libs/
+  build_fabric_1_20_2：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_20_2 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_fabric_1_20_2”
+        路径： build/libs/
+  build_fabric_1_20_6：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD fabric_1_20_6 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_fabric_1_20_6”
+        路径： build/libs/
+  build_fabric_1_21：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & cd fabric_1_21 & gradlew 构建
+    - 名称：更新
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_fabric_1_21"
+        path: build/libs/
+  build_fabric_1_21_4:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd fabric_1_21_4 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_fabric_1_21_4"
+        path: build/libs/
+  build_fabric_1_21_5:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd fabric_1_21_5 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_fabric_1_21_5"
+        path: build/libs/      
+  build_forge_1_7_10:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_7_10 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_7_10"
+        path: build/libs/
+  build_forge_1_12_2:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_12_2 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_12_2"
+        path: build/libs/
+  build_forge_1_16_5:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 8
+      uses: actions/setup-java@v4
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_16_5 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_16_5"
+        path: build/libs/
+  build_forge_1_18_2:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_18_2 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_18_2"
+        path: build/libs/
+  build_forge_1_19_2:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_19_2 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_19_2"
+        path: build/libs/
+  build_forge_1_20:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd forge_1_20 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_forge_1_20"
+        path: build/libs/
+  build_neoforge_1_20_4:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd neoforge_1_20_4 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_neoforge_1_20_4"
+        path: build/libs/
+  build_neoforge_1_20_5:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd neoforge_1_20_5 && gradlew build
+    - name: update
+      uses: actions/upload-artifact@v4
+      with:
+        name: "allmusic_server_neoforge_1_20_5"
+        path: build/libs/
+  build_neoforge_1_21:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3 # v3.1.0
+    - name: build
+      shell: cmd
+      run: |
+        link.cmd && cd neoforge_1_21 && gradlew build
+    - name: update
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称：“allmusic_server_neoforge_1_21”
+        路径： build/libs/
+  build_neoforge_1_21_4：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD neoforge_1_21_4 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_neoforge_1_21_4”
+        路径： build/libs/
+  build_neoforge_1_21_5：
+    运行时间：windows-latest
+    权限：
+      内容： 读取
+    步骤：
+    - 用途：作/checkout@v4
+    - 名称：设置 JDK 21
+      使用： actions/setup-java@v4
+      替换为：
+        Java 版本： '21'
+        发行：'Temurin'
+    - 名称：设置 Gradle
+      使用： gradle/actions/setup-gradle@v3 # v3.1.0
+    - 名称：build
+      外壳：cmd
+      运行： |
+link.cmd & CD neoforge_1_21_5 & gradlew 构建
+    - 名称：更新
+      使用：actions/upload-artifact@v4
+      替换为：
+        名称： “allmusic_server_neoforge_1_21_5”
+        路径： build/libs/
